@@ -93,4 +93,16 @@ this.PostsAPI.post('/api/post/:id/comments', async (req, res) =>
     } catch (error) {
         res.status(400).send(error);
     }
-})
+})})
+
+this.PostsAPI.put('/api/post/:id', async (req, res) => 
+{
+    try {
+        AssertParams(req.body, 'content'); // Ensure 'content' is provided
+        const creds = BAuth(req); // Authenticate user
+        await PostsRepository.Update(req.params.id, { content: req.body.content }, creds); // Call the update method
+        res.status(200).send(`Post ${req.params.id} updated successfully.`);
+    } catch (error) {
+        res.status(400).send({ error: `${error}` });
+    }
+});
