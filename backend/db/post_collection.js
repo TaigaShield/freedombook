@@ -107,7 +107,36 @@ module.exports.Delete = async function (postId, creds)
   await postCollection.findByIdAndDelete(postId);
 }
 
-// LIKE/DISLIKE shit
+/**
+ * @param {string} postId
+ * @param {object} updateObj
+ * @param {object} creds
+ */
+module.exports.Update = async function (postId, updateObj, creds) {
+  const postToUpdate = await postCollection.findById(postId);
+  if (!postToUpdate) {
+    throw new Error(`post:${postId} not found`);
+  }
+
+  const isAuthorized = await AccountsRepository
+      .IsAuthorized(creds.username, creds.password) 
+      && postToUpdate.author === creds.username;
+
+  if (!isAuthorized) {
+    throw new Error("Unauthorized to update post");
+  }
+
+  // UPDATE POST 
+  await postCollection.findByIdAndUpdate(postId, {
+    content: updateObj.content,
+    updatedAt: new Date(Date.now()) 
+  });
+
+  return { message: "Post updated successfully" };
+}
+
+
+// LIKE/DISLIKE 
 
 module.exports.LikePost = async function (creds, postId) 
 {
