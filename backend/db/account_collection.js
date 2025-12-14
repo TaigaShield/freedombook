@@ -36,22 +36,26 @@ module.exports.Get = async function (id)
   return foundAcc ? { userId: foundAcc._id } : null;
 }
 
-module.exports.Delete = async function (id, password)
-{
-  const matchingAccountId = await accountCollection.findById(id);
+module.exports.Delete = async function (id) {
+  const account = await accountCollection.findById(id);
+  if (!account) throw new Error(`Account '${id}' not found`);
 
-  if (!matchingAccountId)
-      throw Error(`Account '${id}' not found`);
-  
-  if (password != matchingAccountId.password)
-    throw Error(`Wrong password ${password} != ${matchingAccountId.password}`);
-
-  await accountCollection.deleteOne({_id: id, password: password});
+  await accountCollection.deleteOne({ _id: id });
 }
-
 module.exports.IsAuthorized = async function (id, password)
 {
   const matchingAccounts = (await accountCollection.find({ _id: id, password: password}));
   
   return LINQ.from(matchingAccounts).firstOrDefault() != null;
+}
+module.exports.Update = async function (id, updates) {
+    const account = await accountCollection.findById(id);
+    if (!account) throw new Error(`Account '${id}' not found`);
+
+    // Apply updates
+    Object.keys(updates).forEach(key => {
+        account[key] = updates[key];
+    });
+
+    await account.save();
 }
