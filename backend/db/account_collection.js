@@ -1,16 +1,17 @@
+//Importing Libraries & Account class
 const mongoose = require('mongoose');
 const Account = require('../class/account');
 const LINQ = require('linq')
 
+//defining mongoose model for account collection
 const accountCollection = mongoose.model('Account', new mongoose.Schema({
   _id: String,
   password: String
 }));
 
-module.exports.Register = async function (accountObj)
-{
+//registering account
+module.exports.Register = async function (accountObj){
   const accountToSave = Account.Parse(accountObj);
-
   await 
     new accountCollection({ 
       _id: accountToSave.id,
@@ -18,8 +19,8 @@ module.exports.Register = async function (accountObj)
     }).save();
 }
 
-module.exports.List = async function () 
-{
+//lists all accounts in db
+module.exports.List = async function () {
   const accountsInDb = (await accountCollection.find());
   
   return LINQ.from(accountsInDb)
@@ -27,6 +28,7 @@ module.exports.List = async function ()
     .toArray();
 }
 
+//grab specific account
 module.exports.Get = async function (id)
 {
   var accountsInDb = (await accountCollection.find({_id: id}));
@@ -36,6 +38,7 @@ module.exports.Get = async function (id)
   return foundAcc ? { userId: foundAcc._id } : null;
 }
 
+//deleting account
 module.exports.Delete = async function (id) {
   const account = await accountCollection.findById(id);
   if (!account) throw new Error(`Account '${id}' not found`);
@@ -48,6 +51,8 @@ module.exports.IsAuthorized = async function (id, password)
   
   return LINQ.from(matchingAccounts).firstOrDefault() != null;
 }
+
+// updating account
 module.exports.Update = async function (id, updates) {
     const account = await accountCollection.findById(id);
     if (!account) throw new Error(`Account '${id}' not found`);

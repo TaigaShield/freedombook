@@ -1,10 +1,11 @@
-
+//importing dependencies
 const AccountsRepository = require('./account_collection');
 const { randomUUID } = require("crypto");
 const mongoose = require('mongoose');
 const Post = require('../class/post');
 const LINQ = require('linq');
 
+//defining mongodb schema and model for posts
 const postCollection = mongoose.model(
   'Post', 
   new mongoose.Schema({
@@ -23,7 +24,8 @@ const postCollection = mongoose.model(
       content: String
     }]
   }));
-
+  
+//creating new post
 /**
  * @param {object} postObj
  * @param {object} creds
