@@ -1,6 +1,7 @@
 <h1>Project Milestones (Freebook)</h1>
 
 <h1>Members<h1>
+ * list
 1.Giancarlo Paredes
 2.Rey pontillas
 3.*redacted*
@@ -47,4 +48,5 @@ Full catchup on Milestone 3 and 4 as *redacted* dropped from the team week 4 of 
 
 
 Add docker run commands to README.
+
 
