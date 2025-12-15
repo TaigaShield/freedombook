@@ -1,10 +1,10 @@
 <h1>Project Milestones (Freebook)</h1>
 
-<h1>Members<h1>
- * list
-1.Giancarlo Paredes
-2.Rey pontillas
-3.*redacted*
+<h2>Members</h2>
+
+- list 1.Giancarlo Paredes
+- list 2.Rey pontillas
+- list 3.*redacted*
 
 <h2>Milestone 1: Proposal (Nov week 1-2)</h2>
 <h3>Initial Plan:</h3>
@@ -48,5 +48,6 @@ Full catchup on Milestone 3 and 4 as *redacted* dropped from the team week 4 of 
 
 
 Add docker run commands to README.
+
 
 
