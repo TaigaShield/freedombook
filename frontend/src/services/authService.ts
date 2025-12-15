@@ -22,12 +22,12 @@ export async function authorize(user: string, pass: string) : Promise<void>
     if (response.status === 200) 
     {
         loggedIn.value = true;
-        alert('successfully authorized');
+        alert('successfully authorized, welcome back');
         _username = user;
         _password = pass;
     } 
     else if (response.status === 401) {
-        alert('❌ Unauthorized')
+        alert('❌ wrong password')
     } 
     else 
     {
