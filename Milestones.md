@@ -11,10 +11,10 @@
 Complete the initial project proposal document (Chapters 1 & 2).
 
 Checklist
-Proposal (chapter 1 & 2) - **Done**
-Mockup program (feasibility) - **Done**
-Approval - **Done(late)**
-Readme.md statement of problem - **Done(late)**
+* Proposal (chapter 1 & 2) - **Done**
+* Mockup program (feasibility) - **Done**
+* Approval - **Done(late)**
+* Readme.md statement of problem - **Done(late)**
 
 <h2>Milestone 2: mockup program & divide tasks (Nov week 3)</h2>
 finalized stack: Node.js + Express.js backend (MongoDB with Mongoose), Basic Auth, and a repository-based REST API architecture.
@@ -48,6 +48,7 @@ Full catchup on Milestone 3 and 4 as *redacted* dropped from the team week 4 of 
 
 
 Add docker run commands to README.
+
 
 
 
