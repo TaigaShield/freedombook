@@ -2,9 +2,9 @@
 
 <h2>Members</h2>
 
-- list 1.Giancarlo Paredes
-- list 2.Rey pontillas
-- list 3.*redacted*
+- Giancarlo Paredes
+- Rey pontillas
+- *redacted*
 
 <h2>Milestone 1: Proposal (Nov week 1-2)</h2>
 <h3>Initial Plan:</h3>
@@ -48,6 +48,7 @@ Full catchup on Milestone 3 and 4 as *redacted* dropped from the team week 4 of 
 
 
 Add docker run commands to README.
+
 
 
 
