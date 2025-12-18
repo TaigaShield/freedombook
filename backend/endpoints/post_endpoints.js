@@ -94,4 +94,21 @@ this.PostsAPI.post('/api/post/:id/comments', async (req, res) =>
         res.status(400).send(error);
     }
 });
+this.PostsAPI.patch('/api/post/:id', async (req, res) =>
+{
+    try
+    {
+        AssertParams(req.body, 'content');
+
+        await PostsRepository.UpdateContent(
+            req.params.id,
+            BAuth(req),
+            req.body.content
+        );
+
+        res.status(200).send(`post:${req.params.id} updated.`);
+    } catch (error) {
+        res.status(400).send({ error: error.message });
+    }
+});
 

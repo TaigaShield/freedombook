@@ -114,28 +114,24 @@ module.exports.Delete = async function (postId, creds)
  * @param {object} updateObj
  * @param {object} creds
  */
-module.exports.Update = async function (postId, updateObj, creds) {
+module.exports.UpdateContent = async function (postId, creds, content)
+{
   const postToUpdate = await postCollection.findById(postId);
-  if (!postToUpdate) {
+  if (!postToUpdate)
     throw new Error(`post:${postId} not found`);
-  }
 
-  const isAuthorized = await AccountsRepository
-      .IsAuthorized(creds.username, creds.password) 
-      && postToUpdate.author === creds.username;
+  const isAuthorized =
+    await AccountsRepository.IsAuthorized(creds.username, creds.password)
+    && postToUpdate.author === creds.username;
 
-  if (!isAuthorized) {
+  if (!isAuthorized)
     throw new Error("Unauthorized to update post");
-  }
 
-  // UPDATE POST 
-  await postCollection.findByIdAndUpdate(postId, {
-    content: updateObj.content,
-    updatedAt: new Date(Date.now()) 
-  });
+  postToUpdate.content = content;
+  postToUpdate.updatedAt = new Date();
 
-  return { message: "Post updated successfully" };
-}
+  await postToUpdate.save();
+};
 
 
 // LIKE/DISLIKE 
@@ -213,3 +209,4 @@ module.exports.DeleteComment = async function (postId, commentContent, creds) {
 
     return { message: "Comment deleted successfully" };
 }
+
