@@ -1,0 +1,196 @@
+openapi: 3.0.0
+info:
+  title: FreedomBook API
+  description: REST API documentation for the FreedomBook 
+  version: "1.0.0"
+
+servers:
+  - url: http://localhost:8000
+
+tags:
+  - name: Accounts
+    description: Account-related operations
+  - name: Posts
+    description: Post-related operations
+
+paths:
+
+  /api/accounts:
+    get:
+      tags:
+        - Accounts
+      summary: Get all accounts
+      responses:
+        "200":
+          description: List of accounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+    post:
+      tags:
+        - Accounts
+      summary: Create a new account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Account created
+
+  /api/account/{id}:
+    get:
+      tags:
+        - Accounts
+      summary: Get account by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Account found
+        "404":
+          description: Account not found
+
+    put:
+      tags:
+        - Accounts
+      summary: Update account
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Account updated
+
+    delete:
+      tags:
+        - Accounts
+      summary: Delete account
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Account deleted
+
+  /api/posts:
+    get:
+      tags:
+        - Posts
+      summary: Get all posts
+      responses:
+        "200":
+          description: List of posts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+
+    post:
+      tags:
+        - Posts
+      summary: Create a new post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Post created
+
+  /api/posts/{id}:
+    get:
+      tags:
+        - Posts
+      summary: Get post by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Post found
+        "404":
+          description: Post not found
+
+    put:
+      tags:
+        - Posts
+      summary: Update post content
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Post updated
+
+    delete:
+      tags:
+        - Posts
+      summary: Delete post
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Post deleted
+
+  /api/posts/{id}/react/{type}:
+    post:
+      tags:
+        - Posts
+      summary: React to a post
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: type
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Reaction added
